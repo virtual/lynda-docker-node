@@ -4,3 +4,10 @@ services:
 script:
   - docker build -t satinflame/lyndanode .
   - docker images satinflame/lyndanode
+before_deploy:
+  - docker login -u $DOCKERUSER -p $DOCKERPW
+deploy:
+  provider: script
+  script: docker push satinflame/lyndanode
+  on:
+    branch: master
